@@ -20,3 +20,7 @@ nytprof.out
 /_eumm/
 /Holmes_Training_Data/*.TXT
 *.txt
+keras-master.zip
+/keras-master/
+test.py
+*.pyc
