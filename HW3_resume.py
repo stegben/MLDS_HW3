@@ -14,6 +14,7 @@ from model.layers.recurrent import GRU
 
 s = 200 # split training set
 sen = 150 # sentence length
+epochs = 1
 
 
 
@@ -93,9 +94,11 @@ model.add(Activation('time_distributed_softmax'))
 trainer = Adadelta( lr = 0.2 , rho = 0.95)
 model.compile( loss = "categorical_crossentropy" , optimizer = trainer)
 
+model.load_weights('model.ke')
+
 train_num = len(train)
 
-for epoch in range(1):
+for epoch in range(epochs):
 	print('_______in epoch: ',epoch)
 	for split in range(s):
 		print('_______in split: ',split)
