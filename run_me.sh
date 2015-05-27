@@ -6,7 +6,7 @@
 #  b00901010 Lin Xien Jing
 #  Kado
 
-sudo pip install gensim
+# sudo pip install gensim
 
 # training data preprocessing
 python training_preprocessing.py Holmes_Training_Data tr.txt
