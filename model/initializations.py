@@ -59,9 +59,6 @@ def orthogonal(shape, scale=1.1):
     q = q.reshape(shape)
     return sharedX(scale * q[:shape[0], :shape[1]])
 
-def zero(shape):
-    return shared_zeros(shape)
-
 
 from .utils.generic_utils import get_from_module
 def get(identifier):

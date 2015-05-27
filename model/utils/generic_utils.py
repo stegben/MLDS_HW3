@@ -17,6 +17,27 @@ def get_from_module(identifier, module_params, module_name, instantiate=False):
 def make_tuple(*args):
     return args
 
+def printv(v, prefix=''):
+    if type(v) == dict:
+        if 'name' in v:
+            print(prefix + '#' + v['name'])
+            del v['name']
+        prefix += '...'
+        for nk, nv in v.items():
+            if type(nv) in [dict, list]:
+                print(prefix + nk + ':')
+                printv(nv, prefix)
+            else:
+                print(prefix + nk + ':' + str(nv))
+    elif type(v) == list:
+        prefix += '...'
+        for i, nv in enumerate(v):
+            print(prefix + '#' + str(i))
+            printv(nv, prefix) 
+    else:
+        prefix += '...'
+        print(prefix + str(v))
+
 class Progbar(object):
     def __init__(self, target, width=30, verbose=1):
         '''
@@ -52,7 +73,9 @@ class Progbar(object):
             sys.stdout.write("\b" * (self.total_width+1))
             sys.stdout.write("\r")
 
-            bar = '%d/%d [' % (current, self.target)
+            numdigits = int(np.floor(np.log10(self.target))) + 1
+            barstr = '%%%dd/%%%dd [' % (numdigits, numdigits)
+            bar = barstr % (current, self.target)
             prog = float(current)/self.target
             prog_width = int(self.width*prog)
             if prog_width > 0:
